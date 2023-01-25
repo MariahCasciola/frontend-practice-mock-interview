@@ -12,9 +12,12 @@ function App() {
         console.log(error)
       });
   }, []);
-
+// console.log(posts)
   return (
     <div className="App">
+      {posts.map((post, index)=>{
+        return <PostDetail post={post} key={index} />
+      })}
     </div>
   );
 }
