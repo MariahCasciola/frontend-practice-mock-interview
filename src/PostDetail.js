@@ -1,14 +1,17 @@
 import React from "react";
-import { useState, useEffect } from "react";
-import CommentDetail from "./CommentDetail";
+import { useEffect, useState } from "react";
+import Comment from "./Comment";
 
-function PostsDetail({ post }) {
+function PostDetail({ post }) {
+
   const [clicked, setClicked] = useState(false);
-  const [comments, setComments] = useState([]);
+  const [comments, setComments]= useState([])
 
-  const handleClick = () => {
-    setClicked(!clicked);
+  const clickHandler = () => {
+    setClicked(!clicked)
   };
+// console.log(post.id)
+// post id is a number
 
   useEffect(() => {
     fetch(`https://jsonplaceholder.typicode.com/posts/${post.id}/comments`)
@@ -18,16 +21,17 @@ function PostsDetail({ post }) {
         console.log(error);
       });
   }, []);
+//we have an array of comments we want to map through
 
-  return (
-    <div>
-      <h1>{post.title}</h1>
-      <p onClick={handleClick} >{post.body}</p>
-      {clicked ? comments.map((comment, key)=>{
-        return <CommentDetail key={key} comment={comment} />
-      }) : null}
+  return ( clicked? 
+    comments.map((comment)=>{
+      return <Comment comment={comment} />
+    })
+    :<div>
+      <h2>{post.title}</h2>
+      <p onClick={clickHandler}> {post.body} </p>
     </div>
   );
 }
 
-export default PostsDetail;
+export default PostDetail;

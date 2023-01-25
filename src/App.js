@@ -3,20 +3,20 @@ import PostDetail from "./PostDetail";
 
 function App() {
   const [posts, setPosts] = useState([]);
-
+  
   useEffect(() => {
     fetch("https://jsonplaceholder.typicode.com/posts?userId=1")
       .then((response) => response.json())
       .then(setPosts)
       .catch((error) => {
-        console.log(error);
+        console.log(error)
       });
   }, []);
-  // console.log(posts);
+// console.log(posts)
   return (
     <div className="App">
-      {posts.map((post, index) => {
-        return <PostDetail key={index} post={post} />;
+      {posts.map((post, index)=>{
+        return <PostDetail post={post} key={index} />
       })}
     </div>
   );
